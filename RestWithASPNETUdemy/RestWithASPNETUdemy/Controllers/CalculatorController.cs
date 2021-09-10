@@ -63,14 +63,14 @@ namespace RestWithASPNETUdemy.Controllers
             return BadRequest("Invalid Input");
         }
 
-        [HttpGet("rad/{number}")]
-        public IActionResult GetRad(string number)
+        [HttpGet("sqrt/{number}")]
+        public IActionResult GetSquareRoot(string number)
         {
             if (IsNumeric(number))
             {
                 double numberToDouble = (double)ConvertToDecimal(number);
-                var rad = Math.Sqrt(numberToDouble);
-                return Ok(rad.ToString());
+                var sqrt = Math.Sqrt(numberToDouble);
+                return Ok(sqrt.ToString());
             }
             return BadRequest("Invalid Input");
         }
@@ -89,7 +89,7 @@ namespace RestWithASPNETUdemy.Controllers
         private bool IsNumeric(string strNumber)
         {
             double number;
-            bool isNumber = double.TryParse(strNumber, NumberStyles.Any, CultureInfo.InvariantCulture, out number);
+            bool isNumber = double.TryParse(strNumber, NumberStyles.Any, NumberFormatInfo.InvariantInfo, out number);
             return isNumber;
         }
 
@@ -102,12 +102,5 @@ namespace RestWithASPNETUdemy.Controllers
             }
             return 0;
         }
-
-        // Metodo criado por Fogal, um cara Animal
-        //private double ConvertToDecimal(string strNumber)
-        //{
-        //    double number = Convert.ToDouble(strNumber, CultureInfo.InvariantCulture);
-        //    return number;
-        //}
     }
 }
